@@ -35,9 +35,10 @@
         const config = { 
             fps: 10, 
             qrbox: (width, height) => {
-                const minEdge = Math.min(width, height);
-                const size = Math.floor(minEdge * 0.7);
-                return { width: size, height: size };
+                const minWidth = Math.min(width * 0.8);
+               const minHeight = Math.min(height * 0.8);
+                
+                return { width: minWidth, height: minHeight };
             },
             formatsToSupport: [ Html5QrcodeSupportedFormats.DATA_MATRIX ] 
         };
