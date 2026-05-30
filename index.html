@@ -1,6 +1,4 @@
-javascript:(function(){
-const url = 'НАПИШИ_СЮДА_СВОЙ_URL_ИЗ_ЯНДЕКСА';
-const htmlContent = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +25,9 @@ const htmlContent = `<!DOCTYPE html>
         </div>
     </main>
     <script>
-        const YANDEX_FUNCTION_URL = '${url}';
+        // Вставь сюда свой URL вместо этой заглушки:
+        const YANDEX_FUNCTION_URL = 'https://functions.yandexcloud.net/ТВОЙ_ИДЕНТИФИКАТОР_ФУНКЦИИ';
+
         const statusEl = document.getElementById('result-status');
         const dataEl = document.getElementById('result-data');
         const restartBtn = document.getElementById('btn-restart');
@@ -70,16 +70,16 @@ const htmlContent = `<!DOCTYPE html>
             .then(data => {
                 statusEl.innerText = "Данные успешно получены";
                 statusEl.className = "text-center text-green-600 font-bold text-lg";
-                dataEl.innerHTML = \`
+                dataEl.innerHTML = `
                     <div class="border-t border-gray-200 pt-2">
-                        <p class="text-xs text-gray-400 font-mono break-all"><b>Raw Code:</b> \${data.scanned_code || decodedText}</p>
+                        <p class="text-xs text-gray-400 font-mono break-all"><b>Raw Code:</b> ${data.scanned_code || decodedText}</p>
                     </div>
                     <div class="mt-2">
-                        <p class="text-base text-gray-900 font-semibold">\${data.product_name || 'Наименование не найдено'}</p>
-                        <p class="text-sm text-gray-500"><b>GTIN:</b> \${data.gtin || '—'}</p>
-                        <p class="text-sm text-gray-500"><b>Статус:</b> \${data.verified ? 'Проверен ✅' : 'Ошибка проверки ❌'}</p>
+                        <p class="text-base text-gray-900 font-semibold">${data.product_name || 'Наименование не найдено'}</p>
+                        <p class="text-sm text-gray-500"><b>GTIN:</b> ${data.gtin || '—'}</p>
+                        <p class="text-sm text-gray-500"><b>Статус:</b> ${data.verified ? 'Проверен ✅' : 'Ошибка проверки ❌'}</p>
                     </div>
-                \`;
+                `;
                 dataEl.classList.remove('hidden');
                 restartBtn.classList.remove('hidden');
             })
@@ -92,14 +92,6 @@ const htmlContent = `<!DOCTYPE html>
         function onScanFailure(error) {}
         restartBtn.addEventListener('click', startScanner);
         window.addEventListener('DOMContentLoaded', startScanner);
-    <\/script>
+    </script>
 </body>
-</html>`;
-const blob = new Blob([htmlContent], {type: 'text/html'});
-const a = document.createElement('a');
-a.href = URL.createObjectURL(blob);
-a.download = 'index.html';
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-})();
+</html>
