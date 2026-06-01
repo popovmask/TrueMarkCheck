@@ -33,7 +33,7 @@
         const restartBtn = document.getElementById('btn-restart');
         const html5QrCode = new Html5Qrcode("reader");
         const config = { 
-            fps: 10, 
+            fps: 15, 
             qrbox: (width, height) => {
                 const minWidth = Math.min(width * 0.8);
                const minHeight = Math.min(height * 0.8);
@@ -48,7 +48,8 @@
             dataEl.classList.add('hidden');
             dataEl.innerHTML = '';
             restartBtn.classList.add('hidden');
-            html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess, onScanFailure)
+            html5QrCode.start({ facingMode: "environment", width: { ideal: 1920 },  // Запрашиваем Full HD по ширине
+        height: { ideal: 1080 }  }, config, onScanSuccess, onScanFailure)
             .catch(err => {
                 statusEl.innerText = "Ошибка доступа к камере: " + err;
                 statusEl.className = "text-center text-red-600 font-medium";
