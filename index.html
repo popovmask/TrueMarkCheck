@@ -40,7 +40,12 @@
                 
                 return { width: minWidth, height: minHeight };
             },
-            formatsToSupport: [ Html5QrcodeSupportedFormats.DATA_MATRIX ] 
+            formatsToSupport: [ Html5QrcodeSupportedFormats.DATA_MATRIX ] ,
+             // Запрашиваем у камеры высокое разрешение здесь:
+    videoConstraints: {
+        width: { ideal: 1920 },
+        height: { ideal: 1080 }
+    }
         };
         function startScanner() {
             statusEl.innerText = "Поиск DataMatrix кодов...";
@@ -48,8 +53,7 @@
             dataEl.classList.add('hidden');
             dataEl.innerHTML = '';
             restartBtn.classList.add('hidden');
-            html5QrCode.start({ facingMode: "environment", width: { ideal: 1920 },  // Запрашиваем Full HD по ширине
-        height: { ideal: 1080 }  }, config, onScanSuccess, onScanFailure)
+            html5QrCode.start({ facingMode: "environment"}, config, onScanSuccess, onScanFailure)
             .catch(err => {
                 statusEl.innerText = "Ошибка доступа к камере: " + err;
                 statusEl.className = "text-center text-red-600 font-medium";
